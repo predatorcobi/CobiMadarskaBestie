@@ -19,102 +19,76 @@
         
         /* --- MEGA CHAOS EFFECTY --- */
         body.rage { animation: rageFlash 0.2s infinite; }
-        @keyframes rageFlash {
-            0% { background-color: #000; }
-            50% { background-color: #500; }
-            100% { background-color: #000; }
-        }
+        @keyframes rageFlash { 0% { background-color: #000; } 50% { background-color: #500; } 100% { background-color: #000; } }
 
         .screen-shake { animation: screenShake 0.3s; }
-        @keyframes screenShake {
-            0% { transform: translate(0); }
-            25% { transform: translate(10px, -10px); }
-            50% { transform: translate(-10px, 10px); }
-            75% { transform: translate(5px, -5px); }
-            100% { transform: translate(0); }
-        }
+        @keyframes screenShake { 0% { transform: translate(0); } 25% { transform: translate(10px, -10px); } 50% { transform: translate(-10px, 10px); } 100% { transform: translate(0); } }
 
-        .particle {
-            position: absolute; font-size: 25px; pointer-events: none; z-index: 1000;
-            animation: explode 1s forwards cubic-bezier(0, .9, .57, 1);
-        }
-        @keyframes explode {
-            to { transform: translate(var(--x), var(--y)) scale(0.1) rotate(360deg); opacity: 0; }
-        }
+        .particle { position: absolute; font-size: 25px; pointer-events: none; z-index: 1000; animation: explode 1s forwards cubic-bezier(0, .9, .57, 1); }
+        @keyframes explode { to { transform: translate(var(--x), var(--y)) scale(0.1) rotate(360deg); opacity: 0; } }
 
         .glitch { animation: glitch 0.1s infinite; }
-        @keyframes glitch {
-            0% { transform: skew(0deg); filter: hue-rotate(0deg); }
-            25% { transform: skew(5deg); filter: hue-rotate(90deg); }
-            50% { transform: skew(-5deg); filter: hue-rotate(180deg); }
-            100% { transform: skew(0deg); filter: hue-rotate(0deg); }
-        }
+        @keyframes glitch { 0% { transform: skew(0deg); filter: hue-rotate(0deg); } 50% { transform: skew(-5deg); filter: hue-rotate(180deg); } 100% { transform: skew(0deg); filter: hue-rotate(0deg); } }
 
-        /* HEADER & ANIMACE */
+        /* HEADER */
         .glitch-header {
             background: linear-gradient(to bottom, var(--hu-red), var(--hu-white), var(--hu-green));
-            padding: 60px 20px; border-bottom: 10px solid var(--hu-gold); text-shadow: 5px 5px 0px #000;
-            text-align: center;
+            padding: 60px 20px; border-bottom: 10px solid var(--hu-gold); text-shadow: 5px 5px 0px #000; text-align: center;
         }
         h1 { font-family: 'Permanent Marker', cursive; font-size: clamp(40px, 8vw, 80px); margin: 0; animation: shake 0.3s infinite; }
-        @keyframes shake { 0% { transform: translate(0,0); } 10% { transform: translate(-2px,-1px); } 20% { transform: translate(2px,1px); } 100% { transform: translate(0,0); } }
+        @keyframes shake { 0% { transform: translate(0,0); } 10% { transform: translate(-2px,-1px); } 100% { transform: translate(0,0); } }
 
-        .marquee-container { background: var(--hu-red); color: white; padding: 10px; font-weight: 900; font-size: 20px; letter-spacing: 2px; border-bottom: 5px solid #fff; }
+        .marquee-container { background: var(--hu-red); color: white; padding: 10px; font-weight: 900; font-size: 20px; border-bottom: 5px solid #fff; }
 
         .container { max-width: 1200px; margin: auto; padding: 20px; }
         
-        .meter-container { background: #333; height: 30px; border: 3px solid var(--hu-gold); margin: 20px 0; position: relative; overflow: hidden; }
-        #gulyas-fill { background: linear-gradient(90deg, #ff0000, #ff8800); height: 100%; width: 50%; transition: width 0.5s; }
-
         .card { 
             background: rgba(0,0,0,0.9); border: 4px solid var(--hu-red); border-radius: 0px; 
-            padding: 40px; margin: 40px 0; position: relative; box-shadow: 15px 15px 0px var(--hu-green);
-            transition: 0.3s;
+            padding: 40px; margin: 40px 0; position: relative; box-shadow: 15px 15px 0px var(--hu-green); transition: 0.3s;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 20px 20px 0px var(--hu-gold); }
 
-        /* HRA: BALATON SURVIVAL */
-        #game-area { 
-            background: #007bb5; border: 5px solid #fff; width: 100%; height: 450px; 
-            position: relative; overflow: hidden; margin-bottom: 20px;
-            background-image: radial-gradient(circle at 50% 50%, #0099cc 0%, #007bb5 100%);
+        /* RADAR */
+        .radar-box {
+            width: 200px; height: 200px; border: 4px solid var(--hu-green); border-radius: 50%; margin: 20px auto;
+            position: relative; background: radial-gradient(circle, #003300 0%, #000 100%); overflow: hidden; cursor: pointer;
         }
-        .game-obj { position: absolute; font-size: 40px; user-select: none; z-index: 10; }
-        #player { position: absolute; font-size: 50px; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 100; transition: filter 0.1s; }
-        
-        /* BOSS */
-        .boss {
-            position: absolute; top: 20px; font-size: 100px; z-index: 50;
-            animation: bossMove 2s infinite alternate ease-in-out;
-            cursor: crosshair; filter: drop-shadow(0 0 20px red);
-        }
-        @keyframes bossMove { from { left: 5%; } to { left: 75%; } }
+        .radar-sweep { position: absolute; width: 100%; height: 100%; background: conic-gradient(from 0deg, transparent 0%, rgba(71, 112, 80, 0.5) 10%, transparent 20%); animation: sweep 2s linear infinite; }
+        @keyframes sweep { to { transform: rotate(360deg); } }
+        .blip { position: absolute; width: 12px; height: 12px; background: red; border-radius: 50%; box-shadow: 0 0 15px red; display: none; }
 
-        #score-board { position: absolute; top: 10px; right: 10px; font-weight: 900; background: var(--hu-gold); color: #000; padding: 5px 15px; z-index: 101; border: 2px solid #000; }
-        #shield-status { position: absolute; top: 10px; left: 10px; font-weight: 900; color: #ff0000; background: #fff; padding: 5px 15px; display: none; z-index: 101; border: 2px solid red;}
-        #event-log { position: absolute; bottom: 60px; width: 100%; text-align: center; color: yellow; font-weight: 900; font-size: 24px; text-shadow: 2px 2px #000; pointer-events: none; }
+        /* MINIGAMES STYLES */
+        .river { width: 100%; height: 100px; background: linear-gradient(to bottom, #00c6ff, #0072ff); border-radius: 10px; margin: 20px 0; position: relative; overflow: hidden; border: 4px solid #fff; }
+        .boat { position: absolute; left: 10px; top: 20px; font-size: 50px; transition: left 0.1s linear; z-index: 5; }
+        .finish { position: absolute; right: 20px; top: 0; width: 15px; height: 100%; background: repeating-linear-gradient(45deg, #000, #000 10px, #fff 10px, #fff 20px); }
+        .key-hint { background: var(--hu-red); padding: 5px 10px; border-radius: 5px; font-family: monospace; }
+        #energy-bar-container { width: 100%; height: 35px; background: #333; border: 3px solid var(--hu-gold); margin: 20px 0; }
+        #energy-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--hu-red), var(--hu-green)); transition: 0.3s; }
 
+        /* BALATON SURVIVAL */
+        #game-area { background: #007bb5; border: 5px solid #fff; width: 100%; height: 450px; position: relative; overflow: hidden; background-image: radial-gradient(circle at 50% 50%, #0099cc 0%, #007bb5 100%); }
+        .game-obj { position: absolute; font-size: 40px; will-change: transform; pointer-events: none; }
+        #player { position: absolute; font-size: 50px; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 100; transition: left 0.05s linear; }
+        #score-board { position: absolute; top: 10px; right: 10px; font-weight: 900; background: var(--hu-gold); color: #000; padding: 5px 15px; z-index: 110; border: 2px solid #000; }
+
+        /* STATS & TABLES */
         .stat-box { display: flex; flex-wrap: wrap; justify-content: space-around; background: var(--hu-gold); color: #000; padding: 20px; font-weight: 900; font-size: 20px; margin: 20px 0; }
-        
-        .mega-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-        .mega-grid img { width: 100%; height: 250px; object-fit: cover; border: 5px solid #fff; filter: grayscale(80%); transition: 0.4s; }
-        .mega-grid img:hover { filter: grayscale(0%); transform: scale(1.05); z-index: 5; position: relative; border-color: var(--hu-red); }
-
         table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 18px; }
         th { background: var(--hu-red); padding: 15px; text-align: left; }
         td { padding: 15px; border-bottom: 1px solid #444; }
 
-        button { 
-            background: var(--hu-red); color: white; border: none; padding: 15px 30px; font-size: 20px; 
-            font-weight: 900; cursor: pointer; text-transform: uppercase; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
-            margin: 10px 0;
-        }
+        /* GALERIE */
+        .mega-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .mega-grid img { width: 100%; height: 250px; object-fit: cover; border: 5px solid #fff; filter: grayscale(80%); transition: 0.4s; }
+        .mega-grid img:hover { filter: grayscale(0%); transform: scale(1.05); z-index: 5; border-color: var(--hu-red); }
+
+        button { background: var(--hu-red); color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: 900; cursor: pointer; text-transform: uppercase; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); margin: 5px; }
         button:hover { background: #ff0000; transform: scale(1.05); }
 
-        .kousnuti-alert { color: #ff0000; font-size: 40px; font-weight: 900; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 999; background: rgba(255,255,255,0.95); padding: 30px; border: 15px solid red; box-shadow: 0 0 50px red; pointer-events: none;}
+        .kousnuti-alert { color: #ff0000; font-size: 40px; font-weight: 900; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 999; background: rgba(255,255,255,0.95); padding: 30px; border: 15px solid red; pointer-events: none;}
     </style>
 </head>
-<body id="main-body">
+<body>
 
 <div class="kousnuti-alert" id="alert">⚠️ ČOBÍK TĚ KOUSNUL! ⚠️</div>
 
@@ -124,48 +98,68 @@
 </header>
 
 <div class="marquee-container">
-    <marquee behavior="scroll" direction="left" scrollamount="12">
-        🔴 BREAKING NEWS: ČOBÍK BYL SPATŘEN, JAK PROKOUSL KOTVU TRAJEKTU NA BALATONU 🔴 MÍSTNÍ OBYVATELÉ JSOU VYZÝVÁNI, ABY SCHOVALI VŠECHNY ZÁSOBY PAPRIKY 🔴 
-    </marquee>
+    <marquee scrollamount="12">🔴 BREAKING NEWS: ČOBÍK PROKOUSL KOTVU NA BALATONU 🔴 SCHOVEJTE PAPRIKU 🔴 GULÁŠ JE V OHROŽENÍ 🔴</marquee>
 </div>
 
 <div class="container">
+
+    <div class="card" style="text-align: center;">
+        <h2>🛰️ MAĎARSKÝ RADAR PROTI BESTII</h2>
+        <div class="radar-box" onclick="scanRadar()">
+            <div class="radar-sweep"></div>
+            <div id="blip-1" class="blip" style="top: 30%; left: 60%;"></div>
+            <div id="blip-2" class="blip" style="top: 70%; left: 20%;"></div>
+        </div>
+        <p id="radar-status" style="font-weight: 900; color: var(--hu-gold);">Klikni pro skenování okolí...</p>
+    </div>
+
+    <div class="card">
+        <h2>🏆 Olympijský Sprint 🏆</h2>
+        <p>Mačkej střídavě <span class="key-hint">A</span> a <span class="key-hint">D</span>!</p>
+        <div class="river" id="sprint-river">
+            <div class="boat" id="sprint-boat">🐕🚣</div>
+            <div class="finish"></div>
+        </div>
+        <button onclick="resetSprint()">ZNOVU NA START</button>
+    </div>
+
+    <div class="card" style="text-align: center;">
+        <h2>🍲 Nakrm Čobíka Gulášem!</h2>
+        <div id="goulash-bowl" onclick="feedCobik()" style="font-size: 100px; cursor: pointer; transition: 0.1s;">🍲</div>
+        <div id="energy-bar-container"><div id="energy-bar"></div></div>
+        <p id="energy-status" style="font-weight: 900;">Energie: 0%</p>
+    </div>
+
     <div class="stat-box">
         <span>GULÁŠ LEVEL: <span id="gulyas-val">88%</span></span>
         <span>STAV: AGRESIVNÍ 👺</span>
         <span>KOUSNUTÍ DNES: <span id="bite-count">666</span></span>
     </div>
 
-    <div class="meter-container"><div id="gulyas-fill"></div></div>
-
     <div class="card">
         <h2>🎮 BALATON SURVIVAL: CHAOS MODE</h2>
-        <p>Uhýbej zubům (🦷), sbírej klobásy (🌭). <b>Paprika (🌶️) = Nesmrtelnost.</b> Kliknutím na <b>Bosse (🐗)</b> ho zničíš!<br>
-        Ovládání: <b>WASD / ŠIPKY</b>. Combo násobič za klobásy!</p>
+        <p>Uhýbej zubům (🦷), sbírej klobásy (🌭). Ovládání: <b>A / D / ŠIPKY</b></p>
         <div id="game-area">
-            <div id="shield-status">🔥 PAPRIKOVÝ ŠTÍT AKTIVNÍ! 🔥</div>
             <div id="score-board">SKÓRE: 0</div>
-            <div id="event-log">PŘIPRAV SE...</div>
             <div id="player">🚣</div>
         </div>
         <button onclick="startGame()">START MASAKRU</button>
     </div>
 
     <div class="card">
-        <h2>🥩 ČOBÍKŮV DENNÍ PŘÍJEM (MINIMÁLNÍ)</h2>
+        <h2>🥩 DENNÍ PŘÍJEM BESTIE</h2>
         <table>
             <tr><th>ČAS</th><th>CHOD</th><th>POZNÁMKA</th></tr>
-            <tr><td>06:00</td><td>3kg Maďarské Klobásy</td><td>Pro ranní nastartování metabolismu.</td></tr>
+            <tr><td>06:00</td><td>3kg Maďarské Klobásy</td><td>Pro ranní metabolismus.</td></tr>
             <tr><td>12:00</td><td>Kotel Guláše</td><td>Včetně toho železného kotle.</td></tr>
-            <tr><td>18:00</td><td>Dřevěné veslo</td><td>Pravidelný přísun vlákniny.</td></tr>
             <tr><td>22:00</td><td>Nohy neopatrných plavců</td><td>Jen jako drobný snack.</td></tr>
         </table>
     </div>
 
     <div class="card">
         <h2>🔥 GENERÁTOR MAĎARSKÉHO HNĚVU</h2>
-        <div id="quote-display" style="font-size: 30px; min-height: 70px; color: var(--hu-gold); font-weight: 900; margin: 20px 0;">--- TADY BUDE HLÁŠKA ---</div>
-        <button onclick="generateQuote()" style="background: var(--hu-green);">NASRAT ČOBÍKA!</button>
+        <div id="quote-display" style="font-size: 30px; min-height: 70px; color: var(--hu-gold); font-weight: 900; margin: 20px 0;">--- KLIKNI NA TLAČÍTKO ---</div>
+        <button onclick="generateQuote()">NASRAT ČOBÍKA!</button>
     </div>
 
     <div class="card">
@@ -182,18 +176,7 @@
 </div>
 
 <script>
-    // ====== STAVOVÉ PROMĚNNÉ ======
-    let gameRunning = false;
-    let score = 0;
-    let playerPos = 50;
-    let isInvincible = false;
-    let shieldTimeout;
-    let gulyasLevel = 80;
-    let rage = 0;
-    let combo = 0;
-    const keys = { a: false, d: false, ArrowLeft: false, ArrowRight: false, w: false, s: false };
-
-    // ====== UTILITY FUNKCE ======
+    // --- POMOCNÉ FUNKCE ---
     function shakeScreen() {
         document.body.classList.add("screen-shake");
         setTimeout(() => document.body.classList.remove("screen-shake"), 300);
@@ -202,10 +185,8 @@
     function spawnParticles(x, y, emoji = "🌶️") {
         for (let i = 0; i < 8; i++) {
             const p = document.createElement("div");
-            p.className = "particle";
-            p.innerText = emoji;
-            p.style.left = x + "px";
-            p.style.top = y + "px";
+            p.className = "particle"; p.innerText = emoji;
+            p.style.left = x + "px"; p.style.top = y + "px";
             p.style.setProperty("--x", (Math.random() * 200 - 100) + "px");
             p.style.setProperty("--y", (Math.random() * 200 - 100) + "px");
             document.body.appendChild(p);
@@ -213,198 +194,105 @@
         }
     }
 
-    function spawnEvent(text) {
-        const log = document.getElementById("event-log");
-        log.innerText = text;
-        setTimeout(() => { if(log.innerText === text) log.innerText = ""; }, 3000);
+    // --- RADAR ---
+    function scanRadar() {
+        const status = document.getElementById('radar-status');
+        status.innerText = "SKENUJU PAPRIKU...";
+        document.querySelectorAll('.blip').forEach(b => b.style.display = 'block');
+        setTimeout(() => {
+            status.innerText = "ČOBÍK DETEKOVÁN V RÁKOSÍ!";
+            shakeScreen();
+        }, 1000);
     }
 
-    function addRage(amount) {
-        rage += amount;
-        if (rage >= 100) {
-            activateRageMode();
-            rage = 0;
+    // --- SPRINT ---
+    let sprintPos = 10; let lastKey = '';
+    document.addEventListener('keydown', (e) => {
+        let key = e.key.toLowerCase();
+        if((key === 'a' || key === 'd') && key !== lastKey) {
+            lastKey = key; sprintPos += 15;
+            let finishLine = document.getElementById("sprint-river").offsetWidth - 80;
+            if(sprintPos >= finishLine) sprintPos = finishLine;
+            document.getElementById("sprint-boat").style.left = sprintPos + "px";
         }
+    });
+    function resetSprint() { sprintPos = 10; lastKey = ''; document.getElementById("sprint-boat").style.left = "10px"; }
+
+    // --- CLICKER ---
+    let energy = 0;
+    function feedCobik() {
+        energy = Math.min(100, energy + 5);
+        document.getElementById("energy-bar").style.width = energy + "%";
+        document.getElementById("energy-status").innerText = `Energie: ${energy}%`;
+        const bowl = document.getElementById('goulash-bowl');
+        bowl.style.transform = "scale(1.3) rotate(10deg)";
+        setTimeout(() => bowl.style.transform = "scale(1)", 100);
+        if(energy === 100) { spawnParticles(window.innerWidth/2, window.innerHeight/2, "🔥"); energy = 0; }
     }
 
-    function activateRageMode() {
-        document.body.classList.add("rage");
-        spawnEvent("🔥 RAGE MODE AKTIVOVÁN 🔥");
-        shakeScreen();
-        setTimeout(() => document.body.classList.remove("rage"), 5000);
-    }
+    // --- BALATON SURVIVAL ---
+    let gameRunning = false; let score = 0; let playerPos = 50;
+    const keys = { a: false, d: false, arrowleft: false, arrowright: false };
 
-    // ====== GULÁŠ LEVEL LOGIKA ======
-    setInterval(() => {
-        gulyasLevel = Math.max(0, gulyasLevel - 1);
-        document.getElementById('gulyas-fill').style.width = gulyasLevel + '%';
-        document.getElementById('gulyas-val').innerText = gulyasLevel + '%';
-    }, 3000);
-
-    const quotes = ["NEMESKEDJ! (Nekecej!)", "A KURVA ÉLETBE! 🤬", "GULYÁS VAGY HALÁL!", "BALATON JE MOJE MOŘE!", "KDE JE MOJE ČABAJKA?!"];
-    function generateQuote() {
-        document.getElementById('quote-display').innerText = quotes[Math.floor(Math.random() * quotes.length)];
-        gulyasLevel = Math.min(100, gulyasLevel + 15);
-        shakeScreen();
-        if (Math.random() > 0.6) triggerBite();
-    }
-
-    function triggerBite() {
-        const a = document.getElementById('alert');
-        a.style.display = 'block';
-        spawnParticles(window.innerWidth/2, window.innerHeight/2, "🩸");
-        setTimeout(() => a.style.display = 'none', 1000);
-        const count = document.getElementById('bite-count');
-        count.innerText = parseInt(count.innerText) + 1;
-    }
-
-    // ====== HERNÍ LOGIKA ======
-    document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() in keys || e.key in keys) keys[e.key.toLowerCase() || e.key] = true; });
-    document.addEventListener('keyup', (e) => { if (e.key.toLowerCase() in keys || e.key in keys) keys[e.key.toLowerCase() || e.key] = false; });
+    document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() in keys) keys[e.key.toLowerCase()] = true; });
+    document.addEventListener('keyup', (e) => { if (e.key.toLowerCase() in keys) keys[e.key.toLowerCase()] = false; });
 
     function gameLoop() {
         if (!gameRunning) return;
-        const speed = 1.3;
-        if (keys.ArrowLeft || keys.a) playerPos = Math.max(0, playerPos - speed);
-        if (keys.ArrowRight || keys.d) playerPos = Math.min(95, playerPos + speed);
-        document.getElementById('player').style.left = playerPos + '%';
-        requestAnimationFrame(gameLoop);
-    }
+        if (keys.arrowleft || keys.a) playerPos = Math.max(2, playerPos - 0.8);
+        if (keys.arrowright || keys.d) playerPos = Math.min(93, playerPos + 0.8);
+        const pEl = document.getElementById('player');
+        pEl.style.left = playerPos + '%';
 
-    function startGame() {
-        if (gameRunning) return;
-        gameRunning = true;
-        score = 0; combo = 0; rage = 0;
-        playerPos = 50;
-        isInvincible = false;
-        document.getElementById('score-board').innerText = "SKÓRE: 0";
-        document.querySelectorAll('.game-obj, .boss').forEach(o => o.remove());
-        spawnEvent("HRA ZAČALA!");
+        const pRect = pEl.getBoundingClientRect();
+        document.querySelectorAll('.game-obj').forEach(obj => {
+            const oRect = obj.getBoundingClientRect();
+            // FÉROVÝ HITBOX
+            if (!(pRect.left + 20 > oRect.right - 10 || pRect.right - 20 < oRect.left + 10 || 
+                  pRect.top + 10 > oRect.bottom - 10 || pRect.bottom - 10 < oRect.top + 10)) {
+                if(obj.dataset.type === 'zub') gameOver();
+                else { score += 50; document.getElementById('score-board').innerText = "SKÓRE: " + score; obj.remove(); }
+            }
+        });
         requestAnimationFrame(gameLoop);
-
-        const objInterval = setInterval(() => {
-            if (!gameRunning) { clearInterval(objInterval); return; }
-            createObject();
-        }, 450);
     }
 
     function createObject() {
+        if(!gameRunning) return;
         const obj = document.createElement('div');
         obj.className = 'game-obj';
-        const rand = Math.random();
-        let type = 'zub';
-
-        if (rand > 0.92) { type = 'paprika'; obj.innerText = '🌶️'; }
-        else if (rand > 0.55) { type = 'klobasa'; obj.innerText = '🌭'; }
-        else { type = 'zub'; obj.innerText = '🦷'; }
-
+        const isZub = Math.random() > 0.4;
+        obj.innerText = isZub ? '🦷' : '🌭';
+        obj.dataset.type = isZub ? 'zub' : 'klobasa';
         obj.style.left = Math.random() * 90 + '%';
-        let top = -50;
+        obj.style.top = '-50px';
+        obj.style.transition = "top 2.5s linear";
         document.getElementById('game-area').appendChild(obj);
-
-        const fall = setInterval(() => {
-            if (!gameRunning) { clearInterval(fall); obj.remove(); return; }
-            top += (type === 'paprika' ? 7 : 5);
-            obj.style.top = top + 'px';
-
-            if (top > 350 && top < 410) {
-                const objLeft = parseFloat(obj.style.left);
-                if (Math.abs(objLeft - playerPos) < 8) {
-                    handleCollision(type, obj);
-                    clearInterval(fall);
-                    obj.remove();
-                }
-            }
-            if (top > 450) { clearInterval(fall); obj.remove(); combo = 0; }
-        }, 20);
+        setTimeout(() => obj.style.top = "500px", 50);
+        setTimeout(() => obj.remove(), 3000);
     }
 
-    function handleCollision(type, obj) {
-        const rect = obj.getBoundingClientRect();
-        if (type === 'zub') {
-            if (isInvincible) {
-                score += 5;
-                spawnParticles(rect.left, rect.top, "✨");
-            } else {
-                gameOver();
-            }
-        } else if (type === 'klobasa') {
-            combo++;
-            score += 10 * combo;
-            addRage(8);
-            spawnParticles(rect.left, rect.top, "🌭");
-            document.getElementById('score-board').innerText = "SKÓRE: " + score;
-        } else if (type === 'paprika') {
-            activateShield();
-            score += 50;
-            addRage(20);
-            spawnParticles(rect.left, rect.top, "🔥");
-        }
+    function startGame() {
+        gameRunning = true; score = 0; playerPos = 50;
+        document.querySelectorAll('.game-obj').forEach(o => o.remove());
+        const spawner = setInterval(() => { if(!gameRunning) clearInterval(spawner); else createObject(); }, 500);
+        requestAnimationFrame(gameLoop);
     }
-
-    function activateShield() {
-        isInvincible = true;
-        const p = document.getElementById('player');
-        p.style.filter = "drop-shadow(0 0 15px red) brightness(1.8)";
-        document.getElementById('shield-status').style.display = "block";
-        clearTimeout(shieldTimeout);
-        shieldTimeout = setTimeout(() => {
-            isInvincible = false;
-            p.style.filter = "none";
-            document.getElementById('shield-status').style.display = "none";
-        }, 5000);
-    }
-
-    function spawnBoss() {
-        if (!gameRunning) return;
-        spawnEvent("👹 ČOBÍK PŘICHÁZÍ!");
-        const boss = document.createElement("div");
-        boss.className = "boss";
-        boss.innerText = "🐗";
-        document.getElementById('game-area').appendChild(boss);
-
-        let hp = 15;
-        const attack = setInterval(() => {
-            if (!gameRunning || hp <= 0) { clearInterval(attack); boss.remove(); return; }
-            createObject(); 
-        }, 300);
-
-        boss.onclick = () => {
-            hp--;
-            shakeScreen();
-            spawnParticles(boss.offsetLeft + 50, boss.offsetTop + 50, "💥");
-            if (hp <= 0) {
-                score += 500;
-                spawnEvent("💀 BOSS ZNIČEN!");
-                document.getElementById('score-board').innerText = "SKÓRE: " + score;
-                boss.remove();
-            }
-        };
-    }
-
-    // NÁHODNÉ UDÁLOSTI
-    setInterval(() => {
-        if (!gameRunning) return;
-        const r = Math.random();
-        if (r > 0.96) {
-            spawnEvent("🌪️ PAPRIKA STORM!");
-            for(let i=0; i<8; i++) setTimeout(createObject, i*100);
-        } else if (r > 0.92) {
-            spawnEvent("⚡ REALITA SE ROZPADÁ");
-            document.body.classList.add("glitch");
-            setTimeout(() => document.body.classList.remove("glitch"), 2000);
-        } else if (r > 0.97) {
-            spawnBoss();
-        }
-    }, 4000);
 
     function gameOver() {
-        gameRunning = false;
+        gameRunning = false; shakeScreen();
+        document.getElementById('alert').style.display = 'block';
+        setTimeout(() => document.getElementById('alert').style.display = 'none', 1500);
+        alert("KONEC! ČOBÍK TĚ ROZTRHAL. SKÓRE: " + score);
+    }
+
+    // --- GENERÁTOR HLÁŠEK ---
+    const quotes = ["NEMESKEDJ! (Nekecej!)", "A KURVA ÉLETBE! 🤬", "GULYÁS VAGY HALÁL!", "BALATON JE MOJE MOŘE!", "KDE JE MOJE ČABAJKA?!"];
+    function generateQuote() {
+        document.getElementById('quote-display').innerText = quotes[Math.floor(Math.random() * quotes.length)];
         shakeScreen();
-        spawnParticles(window.innerWidth/2, window.innerHeight/2, "🩸");
-        alert("ČOBÍK TĚ ROZTRHAL! SKÓRE: " + score);
-        triggerBite();
-        document.querySelectorAll('.game-obj, .boss').forEach(o => o.remove());
+        const count = document.getElementById('bite-count');
+        count.innerText = parseInt(count.innerText) + 1;
     }
 </script>
 
